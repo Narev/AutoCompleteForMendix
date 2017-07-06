@@ -332,6 +332,10 @@ define( [
                 if( self.onChangeMicroflow ) {
                     self._execMf(self._contextObj.getGuid(), self.onChangeMicroflow);
                 }
+            })
+                .on("select2:focus", function(e) {
+                // set the value
+                self._$combo.select2('open');
             });
 
             this._updateControlDisplay();

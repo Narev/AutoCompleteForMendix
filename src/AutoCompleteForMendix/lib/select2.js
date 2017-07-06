@@ -2062,12 +2062,14 @@ define([], function () {
 
                             EventRelay.prototype.bind = function (decorated, container, $container) {
                                 var self = this;
+                                //Added focus to relay list.
                                 var relayEvents = [
                                     'open', 'opening',
                                     'close', 'closing',
                                     'select', 'selecting',
-                                    'unselect', 'unselecting'
-                                ];
+                                    'unselect', 'unselecting',
+                                    'focus'
+                                    ];
 
                                 var preventableEvents = ['opening', 'closing', 'selecting', 'unselecting'];
 
@@ -3941,11 +3943,12 @@ define([], function () {
                                         self.$search.focus();
                                     }, 0);
                                 });
-
+                                //Added this.$selection.focus(); to force the focus on the selection node. from here the tab event is triggered so that it should move on to the next node instead of focus on the selection.
                                 container.on('close', function () {
                                     self.$search.attr('tabindex', -1);
 
                                     self.$search.val('');
+                                    this.$selection.focus();
                                 });
 
                                 container.on('focus', function () {
